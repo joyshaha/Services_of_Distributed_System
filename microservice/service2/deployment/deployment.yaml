@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: service2-deployment
+spec:
+  replicas: 2
+
+  selector:
+    matchLabels:
+      app: service2
+
+  template:
+    metadata:
+      labels:
+        app: service2
+
+    spec:
+      containers:
+        - name: service2
+          image: joy7140/svc2:v1.0.1
+
+          imagePullPolicy: Never
+
+          ports:
+            - containerPort: 8000
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: service2-service
+  # namespace: default
+spec:
+  selector:
+    app: service2-deployment
+
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8000 # Adjusted the target port to 8000 to match the container port
+
+  # type: NodePort # Changed the service type NodePort to ClusterIP to allow internal communication within the cluster
+  type: ClusterIP # Changed the service type to ClusterIP to allow internal communication within the cluster

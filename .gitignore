@@ -1,0 +1,52 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# Virtual environments
+.venv
+venv/
+
+# Node.js generated files
+# Dependencies
+node_modules/
+jspm_packages/
+web_modules/
+
+# Local env variables and secrets
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+*.env
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Diagnostic reports
+report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
+
+# TypeScript / Build output
+dist/
+build/
+out/
+.next/
+.nuxt/
+
+# Optional npm cache and IDE settings
+.npm
+.eslintcache
+.stylelintcache
+.prettiercache
+.DS_Store
+.vscode/
+.idea/

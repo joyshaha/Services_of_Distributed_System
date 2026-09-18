@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: service1-deployment
+spec:
+  replicas: 1 # Adjusted the number of replicas to 3 for better availability
+
+  selector:
+    matchLabels:
+      app: service1
+
+  template:
+    metadata:
+      labels:
+        app: service1
+
+    spec:
+      containers:
+        - name: service1
+          image: joy7140/svc1:v1.0.1
+
+          ports:
+            - containerPort: 3000 # Adjusted the container port to 3000 to match the application configuration
+
+          imagePullPolicy: IfNotPresent
+
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: service1-service
+  # namespace: default
+spec:
+  selector:
+    app: service1-deployment
+
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 3000 # Adjusted the target port to 3000 to match the container port
+
+  # type: NodePort # Changed the service type NodePort to ClusterIP to allow internal communication within the cluster
+  type: LoadBalancer # Changed the service type to LoadBalancer to expose the service externally
