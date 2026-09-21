@@ -9,7 +9,8 @@ async function addNumbers(a, b) {
     
     In Kubernetes, services are discoverable by their DNS names. The DNS name for a service is typically in the format:
     <service-name>.<namespace>.svc.cluster.local
-    
+    - service2-service.devops.svc.cluster.local
+
     In Localhost, When running services locally (e.g., on your development machine), you can use localhost or 127.0.0.1 as the hostname.
     http://localhost:8000
     

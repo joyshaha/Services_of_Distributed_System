@@ -1,12 +1,27 @@
-version: '3.8'
-
 services:
+  loadbalancer:
+    build:
+      context: ./loadbalancer
+      dockerfile: Dockerfile
+    container_name: loadbalancer
+    depends_on:
+      - svc1
+      - svc2
+    # image: joy7140/loadbalancer:v1.0.1
+    ports:
+      - "80:80"
+    environment:
+      - PORT=80
+    networks:
+      - svc-network
   svc1:
     build:
       context: ./service1
       dockerfile: Dockerfile
     container_name: svc1
     # image: joy7140/svc1:v1.0.1
+    depends_on:
+     - svc2
     ports:
       - "3000:3000"
     environment:
