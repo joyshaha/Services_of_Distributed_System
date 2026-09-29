@@ -1,0 +1,30 @@
+# Git
+.git
+.gitignore
+
+# Docker
+Dockerfile
+docker-compose.yml
+
+# Go build output
+server
+*.exe
+*.out
+*.test
+
+# IDE
+.vscode
+.idea
+
+# OS
+.DS_Store
+
+# Environment
+.env
+.env.*
+
+# Logs
+*.log
+
+# Documentation
+README.md

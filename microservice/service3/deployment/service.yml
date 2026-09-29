@@ -1,16 +1,16 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: service1-service
+  name: service3-service
   namespace: devops
 spec:
   selector:
-    app: service1
+    app: service3
 
   ports:
     - protocol: TCP
       port: 80
-      targetPort: 3000
+      targetPort: 8080
       nodePort: 30001 # NodePort for external access, can be accessed via <NodeIP>:30001
 
   type: NodePort

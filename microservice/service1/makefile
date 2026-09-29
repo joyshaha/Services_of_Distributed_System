@@ -62,8 +62,20 @@ kube_deploy:
 	@ cd deployment
 	@ kubectl apply -f deployment.yaml
 
+kube_deploys:
+	@ kubectl get deploy
+
 kube_pods:
 	@ kubectl get pods
+
+kube_describe:
+	@ kubectl describe pod <pod-name>
+
+kube_exec:
+	@ kubectl exec -it <pod-name> -- sh
+
+kube_apply_svc:
+	@ kubectl apply -f service.yaml
 
 kube_svc:
 	@ kubectl get svc

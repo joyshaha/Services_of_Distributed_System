@@ -12,7 +12,7 @@ class AddRequest(BaseModel):
 
 @app.get("/")
 def root():
-    return {"message": "FastAPI server is running Sertvice2!"}
+    return {"message": "FastAPI server is running Service2!"}
 
 
 @app.post("/add")

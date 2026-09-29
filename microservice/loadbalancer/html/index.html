@@ -23,6 +23,13 @@
             text-align: center;
             padding: 20px;
         }
+        /* New class to align buttons inline */
+        .button-group {
+            display: flex;
+            justify-content: center;
+            gap: 10px; /* Adjust spacing between buttons */
+            margin-bottom: 20px;
+        }
         button {
             padding: 10px 20px;
             font-size: 16px;
@@ -31,6 +38,7 @@
             color: white;
             border: none;
             border-radius: 4px;
+            white-space: nowrap; /* Prevents button text from breaking into multiple lines */
         }
         button:hover {
             background-color: #0056b3;
@@ -48,10 +56,14 @@
 <body>
 
     <h1>Simple API Call Example</h1>
-    <p>Click the button below to add 10 and 20 using the microservices.</p>
+    <p>Click the button below to add or substruct 100 and 20 using the microservices.</p>
     
-    <button id="fetch-btn-1">Fetch Service1</button>
-    <button id="fetch-btn-2">Fetch Service2</button>
+    <!-- Added the button-group class here -->
+    <div class="button-group">
+        <button id="fetch-btn-1">Fetch Service1(Recure Call)</button>
+        <button id="fetch-btn-2">Fetch Service2(Add)</button>
+        <button id="fetch-btn-3">Fetch Service3(Substruct)</button>
+    </div>
 
     <div id="result">
         <p style="color: #666;">Data will appear here...</p>
@@ -67,7 +79,7 @@
                 const response = await fetch(path, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ a: 10, b: 20 }),
+                    body: JSON.stringify({ a: 100, b: 20 }),
                 });
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
@@ -86,8 +98,12 @@
         document.getElementById('fetch-btn-2').addEventListener('click', () => {
             callService('/api/service2/add');
         });
+        document.getElementById('fetch-btn-3').addEventListener('click', () => {
+            callService('/api/service3/subtract');
+        });
     </script>
 
 </body>
 </html>
+
 
