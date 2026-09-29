@@ -9,7 +9,7 @@ IMG_TAG:=v1.0.1
 PULL_IMAGE:=${IMG_NAME}:${IMG_TAG}
 
 DOCKER_USERNAME:=joy7140
-DOCKER_PASSWORD:=xEimt^2t%d4H4T
+DOCKER_PASSWORD:=<password>
 
 all: docker_build docker_login docker_push
 
