@@ -1,0 +1,31 @@
+name: GitHub Actions Full CI Workflow
+run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
+
+# Trigger the workflow on pushes to the "main" branch
+on:
+  push:
+    branches: [ "feature/*" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: build-docker-images
+    steps:
+      # Step 1: Check out the repository code
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Step 2: Install make package
+      - name: install make package
+        shell: bash
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y make
+
+      # Step 3: Build and push Docker images for all microservices using the Makefile
+      - name: build and push docker images
+        run: make all
+        env:
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+          TAG: ${GITHUB_RUN_ID}

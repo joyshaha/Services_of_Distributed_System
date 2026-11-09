@@ -1,0 +1,48 @@
+name: GitHub Actions Load Balancer Workflow
+run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
+
+# Trigger the workflow on pushes to the "main" branch
+# on: [push]
+# on: [push, pull_request]
+on:
+  push:
+    branches: [ "feature/*" ]
+  pull_request:
+    branches:
+      - feature/*
+  # workflow_dispatch: # Allows manual triggering from the GitHub Actions tab
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: build-load-balancer-docker-image
+    steps:
+      # Step 1: Check out the repository code
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Step 2: Install make package
+      - name: install make package
+        shell: bash
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y make
+
+      # Step 3: Build the Docker image using the Makefile
+      - name: build docker image
+        shell: bash
+        run: |
+          cd microservice/loadbalancer
+          make docker_build
+
+      # Step 4: Push the Docker image to Docker Hub using the Makefile
+      - name: push build dockerhub 
+        shell: bash
+        run: |
+          cd microservice/loadbalancer
+          make docker_login DOCKER_USERNAME=${{ secrets.DOCKER_USERNAME }} DOCKER_PASSWORD=${{ secrets.DOCKER_PASSWORD }}
+          # make docker_login
+          make docker_push
+        env:
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
